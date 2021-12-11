@@ -1,0 +1,15 @@
+*.docx
+*.pdf
+**/proj_modelsim/work
+**/proj_modelsim/vsim.wlf
+**/proj_modelsim/*.mti
+**/proj_modelsim/*.mpf
+**/proj_modelsim/transcript*
+**/proj_quartus/incremental_db
+**/proj_quartus/*.qws
+**/proj_quartus/db
+**/proj_quartus/*.bak
+**/proj_quartus/output_files/*.*
+**/proj_quartus/output_files/!*.sof
+**/src/*.bak
+
