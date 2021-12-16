@@ -6,28 +6,38 @@ module WrapperDP
 	// INPUTS
 	input            clk,
 	input 	       reset,
+	input	 [7:0]    GPIO_i,//<--esto sw7:sw0
 	//OUTPUTS
 	output [7:0]    GPIO_o,
 	
 	//cONTROL sIGNALS
 	input   PCWrite,
-	input   PCSrc,
+	input   [1:0]PCSrc,	//bj
 	input   RegWrite,
 	input   IorD,
 	input   MemWrite,
 	input   IRWrite,
 	input   RegDst,
-	input   MemtoReg,
+	input   MemtoReg,//[1:0]in bj
 	input   ALUSrcA,
+	input		gpio_i,	//<---esto
 	input  [1:0] ALUSrcB,
 	input  [2:0] ALUControl,
 	output [5:0] Op,
-	output [5:0] Funct
+	output [5:0] Funct,
+	output		 Zero
 );
 
-DataPath DUV(.clk(clk), .reset(reset), .GPIO_o(GPIO_o), .PCWrite(PCWrite), .PCSrc(PCSrc), .RegWrite(RegWrite), .IorD(IorD), 
-					.MemWrite(MemWrite),		.IRWrite(IRWrite), .RegDst(RegDst), .MemtoReg(MemtoReg), .ALUSrcA(ALUSrcA), .ALUSrcB(ALUSrcB), 
-					.ALUControl(ALUControl),.Op(Op), .Funct(Funct)
+DataPath DUV(	.clk(clk), 					.reset(reset), 		
+					.GPIO_i(GPIO_i), 			.GPIO_o(GPIO_o), 		
+					.PCWrite(PCWrite), 		.PCSrc(PCSrc), 			
+					.RegWrite(RegWrite), 	.IorD(IorD), 		
+					.MemWrite(MemWrite),		.IRWrite(IRWrite), 	
+					.RegDst(RegDst), 			.MemtoReg(MemtoReg), 
+					.ALUSrcA(ALUSrcA),		.gpio_i(gpio_i),		
+					.ALUSrcB(ALUSrcB),		.ALUControl(ALUControl),
+					.Op(Op),						.Funct(Funct),
+					.Zero(Zero)
 );
 
 endmodule

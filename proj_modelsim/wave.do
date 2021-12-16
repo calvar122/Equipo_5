@@ -21,10 +21,11 @@ add wave -noupdate -expand -group Intermedite -label RegInstr_o -radix hexadecim
 add wave -noupdate -expand -group Intermedite -label ALU_SrcA_i -radix hexadecimal /TB_mips/DUV/DP/DUV/M_ALU/a
 add wave -noupdate -expand -group Intermedite -label ALU_SrcB_i -radix hexadecimal /TB_mips/DUV/DP/DUV/M_ALU/b
 add wave -noupdate -expand -group Intermedite -label ALU_o -radix hexadecimal /TB_mips/DUV/DP/DUV/M_ALU/y
-add wave -noupdate -color Gold -radix binary -childformat {{{/TB_mips/GPIO_tb[7]} -radix hexadecimal} {{/TB_mips/GPIO_tb[6]} -radix hexadecimal} {{/TB_mips/GPIO_tb[5]} -radix hexadecimal} {{/TB_mips/GPIO_tb[4]} -radix hexadecimal} {{/TB_mips/GPIO_tb[3]} -radix hexadecimal} {{/TB_mips/GPIO_tb[2]} -radix hexadecimal} {{/TB_mips/GPIO_tb[1]} -radix hexadecimal} {{/TB_mips/GPIO_tb[0]} -radix hexadecimal}} -subitemconfig {{/TB_mips/GPIO_tb[7]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[6]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[5]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[4]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[3]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[2]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[1]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[0]} {-color Gold -radix hexadecimal}} /TB_mips/GPIO_tb
-add wave -noupdate -color Gold -radix hexadecimal -childformat {{{/TB_mips/GPIO_tb[7]} -radix hexadecimal} {{/TB_mips/GPIO_tb[6]} -radix hexadecimal} {{/TB_mips/GPIO_tb[5]} -radix hexadecimal} {{/TB_mips/GPIO_tb[4]} -radix hexadecimal} {{/TB_mips/GPIO_tb[3]} -radix hexadecimal} {{/TB_mips/GPIO_tb[2]} -radix hexadecimal} {{/TB_mips/GPIO_tb[1]} -radix hexadecimal} {{/TB_mips/GPIO_tb[0]} -radix hexadecimal}} -subitemconfig {{/TB_mips/GPIO_tb[7]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[6]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[5]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[4]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[3]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[2]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[1]} {-color Gold -radix hexadecimal} {/TB_mips/GPIO_tb[0]} {-color Gold -radix hexadecimal}} /TB_mips/GPIO_tb
+add wave -noupdate /TB_mips/GPIO_i_tb
+add wave -noupdate /TB_mips/GPIO_o_tb
+add wave -noupdate -radix decimal /TB_mips/GPIO_o_tb
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {58 ps} 0}
+WaveRestoreCursors {{Cursor 1} {207 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -40,4 +41,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {32 ps} {64 ps}
+WaveRestoreZoom {0 ps} {32 ps}

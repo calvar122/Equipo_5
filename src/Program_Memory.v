@@ -14,7 +14,7 @@ module Program_Memory
 
 	initial
 	begin
-		$readmemh("C:/PROJECTS/Architecture/mips/src/text.dat", rom);
+		$readmemh("C:/PROJECTS/Architecture/mips/src/T7-1.dat", rom);
 	end
 
 	always @ (Address_i)
