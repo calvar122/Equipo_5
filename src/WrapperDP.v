@@ -17,10 +17,10 @@ module WrapperDP
 	input   IorD,
 	input   MemWrite,
 	input   IRWrite,
-	input   RegDst,
+	input  [1:0] RegDst,
 	input   MemtoReg,//[1:0]in bj
 	input   ALUSrcA,
-	input		gpio_i,	//<---esto
+	input	 [1:0] gpio_i,	//<---esto
 	input  [1:0] ALUSrcB,
 	input  [2:0] ALUControl,
 	output [5:0] Op,
