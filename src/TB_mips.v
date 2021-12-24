@@ -18,8 +18,11 @@ end
 
 initial	begin 
 #0 reset_tb = 0; 
-#3 reset_tb = 1; 
-#0 GPIO_i_tb = 8'b0000_0000; //inyecto 10 simulando el switch input
+#0 GPIO_i_tb = 8'b0000_0000; //inyecto 0 simulando el switch input
+#3 reset_tb = 1;
+#82 GPIO_i_tb = 8'b0000_0111; //inyecto 7 simulando el switch input
+
+
 end
 
 endmodule
