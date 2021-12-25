@@ -17,8 +17,8 @@ module Counter1s
 		//cuando mckl hace 50M de ciclos representa 1 segundo
 		//Se habilitara una bandera cada 25M de ciclos para q nos conmute una senal
 		// esta senal representara cada periodo del reloj de 1 seg
-		
-  localparam CUENTA= 25000000; //hasta donde quiero contar
+	//localparam CUENTA= 25000000; //hasta donde quiero contar	
+  localparam CUENTA= 5000; //hasta donde quiero contar
   integer conteo;			//es el q va contar los flancos de mclk
   wire w1; 					//este es mi flag de 1/2 segundo 
   

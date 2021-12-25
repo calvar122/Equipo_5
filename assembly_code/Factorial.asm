@@ -22,8 +22,6 @@ Loop:
 	addi $sp, $sp, 8 # Increasing stack pointer
 	mul $v0, $a0, $v0 # Multiplying n*Factorial(n-1)
 	jr $ra  # Return to the caller
-	#simon, deja lo hago haber si te entendi bien
-	#va va, deja le hago :vfierro
 Exit:
 nop
 nop

@@ -31,6 +31,7 @@ module DataPath
 	wire [DataWidth-1:0] PC_next;
 	wire [DataWidth-1:0] PC;
 	wire [DataWidth-1:0] ALUOut;
+	wire [DataWidth-1:0] ALUOut_pretty;
 	wire [DataWidth-1:0] Adr;
 	wire [DataWidth-1:0] B;
 	wire [DataWidth-1:0] RD;
@@ -134,9 +135,14 @@ module DataPath
 								.d0(ALUResult), 			.d1(ALUOut), 								.d2({4'b0,Jump_shift}), 					.d3(0), 
 								.Mux_o(PC_next));
 	
+	register Out_pretty (
+								.clk(clk), 					.reset(reset), 							.enable(RegWrite), 
+								.data_in(ALUOut), 
+								.data_out(ALUOut_pretty));
+	
 	assign Op = Instr[31:26];
 	assign Funct = Instr [5:0];
-	assign GPIO_o = ALUOut [7:0];
+	assign GPIO_o = ALUOut_pretty [7:0];
 	assign Zero = !ALUResult;
 	
 endmodule 
