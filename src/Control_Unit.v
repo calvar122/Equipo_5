@@ -20,7 +20,8 @@ module Control_Unit
 	output reg	[1:0]	ALU_Src_B,
 	output reg	[2:0]	ALU_Control,
 	output reg 	[1:0]	PC_Src,			//JB[1:0]
-	output reg 	[1:0]	GPIO_I			//SW
+	output reg 	[1:0]	GPIO_I,			//SW
+	output reg 			final
 );
 	//Parameters
 	parameter
@@ -81,6 +82,7 @@ always @(Op or Funct or current_s)
 		Mem_to_Reg 	= 1'b0;
 		Reg_Dst 		= 2'b00;
 		GPIO_I 		= 2'b00;
+		final			= 1'b0;
 		
 	case (current_s) 
 		IF:  begin
@@ -99,6 +101,7 @@ always @(Op or Funct or current_s)
 					Mem_to_Reg = 1'b0;
 					Reg_Dst = 2'b00; 	
 					GPIO_I = 2'b01;		//SW
+					final			= 1'b0;
 
 					next_s = ID;
 				end
@@ -126,7 +129,7 @@ always @(Op or Funct or current_s)
 					Reg_Dst = 2'b00;			
 					Mem_to_Reg = 1'b0;										
 					GPIO_I = 2'b01;	//			<--SW
-				
+					final			= 1'b0;
 
 				if(Op == 6'b000000)			//no opcode, then is R format
 					if(Funct == 6'b011000)
@@ -166,10 +169,10 @@ always @(Op or Funct or current_s)
 				PC_Src = 2'b00;				//JB no
 				
 				GPIO_I = 2'b01;	//			<--SW
-				
+				final			= 1'b0;
 				if (Op == 6'b001010)	//op=a, then is slti	I formar
 				ALU_Control= 3'b011;	//a<b
-				
+				final			= 1'b0;
 			next_s = IWB_I;
 		  end
 		  
@@ -188,10 +191,11 @@ always @(Op or Funct or current_s)
 			PC_Src = 2'b00;				//JB no
 			
 			GPIO_I = 2'b01;//			<--SW
+			final			= 1'b0;
 			if(Funct == 6'b001000)
 			next_s = JR;
 			else 
-		next_s = IWB_R;
+			next_s = IWB_R;
 		end
 		
 		IE_B:  begin
@@ -212,7 +216,7 @@ always @(Op or Funct or current_s)
 			Reg_Dst = 2'b00;			
 			Mem_to_Reg = 1'b0;		
 			Reg_Write =0;						
-			
+			final			= 1'b0;
 			
 		next_s = IF;
 		end
@@ -232,7 +236,7 @@ always @(Op or Funct or current_s)
 			PC_Src = 2'b00;	//lis1
 			Branch = 1'b0;
 			Reg_Write = 0;
-			
+			final			= 1'b0;
 			next_s = IW_jal;
 			
 		end
@@ -249,9 +253,8 @@ always @(Op or Funct or current_s)
 			Mem_to_Reg = 1'b0;		//JB no
 			Reg_Write =0;				//JB no		
 			PC_Src = 2'b00;				//JB no
-			
 			next_s = IWB_R;
-			
+			final			= 1'b0;
 			
 			end 
 			
@@ -271,6 +274,7 @@ always @(Op or Funct or current_s)
 			IR_Write = 0;
 			PC_Src = 2'b00;	//lis1
 			Branch = 1'b0;
+			final			= 1'b0;
 			next_s = IE_J;
 		end
 		
@@ -287,6 +291,7 @@ always @(Op or Funct or current_s)
 			Reg_Write =0;
 			Mem_to_Reg = 1'b0;
 			Reg_Dst = 2'b00;
+			final			= 1'b0;
 			/*
 			ALU_Src_A = 0;
 			ALU_Src_B = 2'b11;
@@ -311,6 +316,7 @@ always @(Op or Funct or current_s)
 				ALU_Control= 3'b010;
 				PC_Src = 2'b00; 
 				GPIO_I = 2'b10;	//			<--SW
+				final			= 1'b0;
 			next_s = IWB_I;
 		  end
 		  
@@ -331,6 +337,7 @@ always @(Op or Funct or current_s)
 
 
 				PC_Src = 2'b00; 
+				final			= 1'b0;
 	//			<--SW
 			next_s = IWB_I;
 		  end
@@ -350,7 +357,7 @@ always @(Op or Funct or current_s)
 				Mem_to_Reg = 0;
 				Reg_Dst = 2'b00;	//in JB is 1
 				GPIO_I = 2'b01;	//			<--SW	
-				
+				final			= 1'b0;
 				if(Op == 6'b100011)//(LW)
 					next_s = LW_MR;
 				else if (Op == 6'b101011)//(SW)
@@ -372,6 +379,7 @@ always @(Op or Funct or current_s)
 				Mem_to_Reg = 1;
 				Reg_Dst = 2'b00;
 				GPIO_I = 2'b01;	//			<--SW	
+				final			= 1'b0;
 				next_s = LW_MWB;
 			end
 	LW_MWB: begin 	
@@ -388,6 +396,7 @@ always @(Op or Funct or current_s)
 				ALU_Src_B = 2'b10;//l					
 				Reg_Dst = 2'b00;
 				GPIO_I = 2'b01;	//			<--SW	
+				final			= 1'b0;
 				next_s = LW_MWB2;
 			end
 		LW_MWB2: begin 	
@@ -404,6 +413,7 @@ always @(Op or Funct or current_s)
 				ALU_Src_B = 2'b10;//l					
 				Reg_Dst = 2'b00;
 				GPIO_I = 2'b01;	//			<--SW
+				final			= 1'b0;
 				next_s = IF;
 			end
 	SW_MW: begin				
@@ -420,7 +430,7 @@ always @(Op or Funct or current_s)
 				Mem_to_Reg = 1;//l
 				Reg_Dst = 2'b00;	//in JB is 1
 				GPIO_I = 2'b01;	//			<--SW	
-
+				final			= 1'b0;
 				next_s = IF;
 			end
 	JR:    begin 
@@ -438,6 +448,7 @@ always @(Op or Funct or current_s)
 				PC_Src = 2'b01;				//JB no
 				
 				GPIO_I = 2'b00;
+				final			= 1'b0;
 				next_s = IF;
 				end
 
@@ -455,6 +466,7 @@ always @(Op or Funct or current_s)
 				ALU_Control= 3'b010;		//JB no
 				PC_Src = 2'b00;				//JB no
 				GPIO_I = 2'b01;	//			<--SW
+				final			= 1'b0;
 			next_s = IF;
 			end
 	
@@ -489,7 +501,11 @@ always @(Op or Funct or current_s)
 				PC_Src = 2'b00;				//JB no
 				
 				GPIO_I = 2'b01;	//			<--SW
-			next_s = IF;
+				final			= 1'b0;
+				if(Funct == 6'b100101)
+					final = 1'b1;
+				else
+				next_s = IF;
 			end
 
 		endcase 

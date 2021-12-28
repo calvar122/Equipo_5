@@ -23,6 +23,9 @@ Loop:
 	mul $v0, $a0, $v0 # Multiplying n*Factorial(n-1)
 	jr $ra  # Return to the caller
 Exit:
+#andi $s0, $v0, 11111111
+#and $s0, $v0, 
+or $s0, $v0, $t7
 nop
 nop
 nop

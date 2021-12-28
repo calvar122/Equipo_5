@@ -24,20 +24,21 @@ wire [2:0]ALUControl_w;
 wire [1:0] PCSrc_w;
 wire 			Zero;
 wire [1:0]gpioControl;
+wire	final;
 
 //assign clk = clk_w;
 Control_Unit CU(
 					.clk(clk_i), 				.reset(reset_i), 				.Op(OP_w),					.Funct(FUNCT_w),				.PC_En(PCW_w),			
 					.I_or_D(IorD_w),			.Mem_Write(MemWrite_w),		.IR_Write(IRWrite_w),	.Reg_Dst(RegDst_w),			.Mem_to_Reg(MemReg_w), 	
 					.Reg_Write(RegWrite_w),	.ALU_Src_A(ALUSrcA_w),		.ALU_Src_B(ALUSrcB_w),	.ALU_Control(ALUControl_w),.PC_Src(PCSrc_w),
-					.GPIO_I(gpioControl),	.Zero(Zero)
+					.GPIO_I(gpioControl),	.Zero(Zero), 					.final(final)
 );
 
 WrapperDP DP(
 					.clk(clk_i),				.reset(reset_i),				.PCWrite(PCW_w),				.PCSrc(PCSrc_w),				.RegWrite(RegWrite_w),	
 					.IorD(IorD_w),				.MemWrite(MemWrite_w), 		.IRWrite(IRWrite_w),			.RegDst(RegDst_w),			.MemtoReg(MemReg_w),	
 					.ALUSrcA(ALUSrcA_w),		.ALUSrcB(ALUSrcB_w),			.ALUControl(ALUControl_w),	.Op(OP_w), 						.Funct(FUNCT_w),
-					.GPIO_o(GPIO_o),			.GPIO_i(GPIO_i), 				.gpio_i(gpioControl),		.Zero(Zero)
+					.GPIO_o(GPIO_o),			.GPIO_i(GPIO_i), 				.gpio_i(gpioControl),		.Zero(Zero),					.final(final)
 );
 
 

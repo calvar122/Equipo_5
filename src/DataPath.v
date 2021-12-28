@@ -23,6 +23,7 @@ module DataPath
 	input	 [1:0] gpio_i,	//<---SW
 	input  [1:0] ALUSrcB,
 	input  [2:0] ALUControl,
+	input		final,
 	output [5:0] Op,
 	output [5:0] Funct,
 	output		Zero	//BJ
@@ -136,7 +137,7 @@ module DataPath
 								.Mux_o(PC_next));
 	
 	register Out_pretty (
-								.clk(clk), 					.reset(reset), 							.enable(RegWrite), 
+								.clk(clk), 					.reset(reset), 							.enable(final), 
 								.data_in(ALUOut), 
 								.data_out(ALUOut_pretty));
 	

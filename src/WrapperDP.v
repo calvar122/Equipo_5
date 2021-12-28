@@ -23,6 +23,7 @@ module WrapperDP
 	input	 [1:0] gpio_i,	//<---esto
 	input  [1:0] ALUSrcB,
 	input  [2:0] ALUControl,
+	input 	final,
 	output [5:0] Op,
 	output [5:0] Funct,
 	output		 Zero
@@ -37,7 +38,7 @@ DataPath DUV(	.clk(clk), 					.reset(reset),
 					.ALUSrcA(ALUSrcA),		.gpio_i(gpio_i),		
 					.ALUSrcB(ALUSrcB),		.ALUControl(ALUControl),
 					.Op(Op),						.Funct(Funct),
-					.Zero(Zero)
+					.Zero(Zero),				.final(final)
 );
 
 endmodule
